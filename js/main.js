@@ -68,9 +68,16 @@ searchInput.addEventListener("keyup", function (e) {
 });
 
 function displayForecast() {
+  let dayIndexOne = new Date().getDay();
+  let dayIndexTwo = new Date().getDay() + 1 == 7 ? 0 : new Date().getDay() + 1;
+  let dayIndexThree =
+    new Date().getDay() + 2 == 7
+      ? 0
+      : new Date().getDay() + 2 == 8
+      ? 1
+      : new Date().getDay() + 2;
   // First Column
-  document.querySelectorAll(".day")[0].innerHTML =
-    daysOfWeek[new Date().getDay()];
+  document.querySelectorAll(".day")[0].innerHTML = daysOfWeek[dayIndexOne];
   document.querySelector(".city").innerHTML = res.location.name;
   document.querySelector(".num").innerHTML = forecast[0].day.avgtemp_c;
   document.querySelector(".date").innerHTML = forecast[0].date;
@@ -84,8 +91,8 @@ function displayForecast() {
   document.querySelector(".wind").innerHTML = forecast[0].day.maxwind_kph;
   document.querySelector(".humidity").innerHTML = forecast[0].day.avghumidity;
   // Second Column
-  document.querySelectorAll(".day")[1].innerHTML =
-    daysOfWeek[new Date().getDay() + 1];
+  document.querySelectorAll(".day")[1].innerHTML = daysOfWeek[dayIndexTwo];
+
   document
     .querySelectorAll(".home img")[1]
     .setAttribute("src", `https:${forecast[1].day.condition.icon}`);
@@ -94,8 +101,7 @@ function displayForecast() {
   document.querySelectorAll(".describtion")[1].innerHTML =
     forecast[1].day.condition.text;
   // Third Column
-  document.querySelectorAll(".day")[2].innerHTML =
-    daysOfWeek[new Date().getDay() + 2];
+  document.querySelectorAll(".day")[2].innerHTML = daysOfWeek[dayIndexThree];
   document
     .querySelectorAll(".home img")[2]
     .setAttribute("src", `https:${forecast[2].day.condition.icon}`);
